@@ -12,6 +12,9 @@ public class Maze{
     private int width = 0;
     private char[][] maze;
     private String line;
+    
+    private int entry;
+    private int exit;
 
     public Maze(BufferedReader reader, BufferedReader reader2) {
         this.reader = reader;
@@ -63,6 +66,33 @@ public class Maze{
             }
             System.out.println();
         }
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+
+    public int checkEntry() {
+        for (int i = 0; i < length; i++) {
+            if (maze[i][0] == ' ') {
+                entry = i;
+            }
+        }
+        return entry;
+    }
+
+    public int checkExit() {
+        for (int j = 0; j < length; j++) {
+            if (maze[j][0] == ' ') {
+                exit = j;
+            }
+        }
+        return exit;
     }
 
 }

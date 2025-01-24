@@ -45,6 +45,9 @@ public class Main {
             maze.setDimensions();
             maze.setMaze();
             maze.getMaze();
+            System.out.println(maze.checkEntry() + ",0");
+            System.out.println(maze.checkExit() + "," + maze.getWidth());
+
 
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
