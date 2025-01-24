@@ -26,6 +26,7 @@ public class Main {
             logger.info("**** Reading the maze from file " + inputFile);
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line;
+
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
                     if (line.charAt(idx) == '#') {
@@ -33,12 +34,22 @@ public class Main {
                     } else if (line.charAt(idx) == ' ') {
                         logger.info("PASS ");
                     }
+
                 }
                 logger.info(System.lineSeparator());
             }
+
+            BufferedReader reader1 = new BufferedReader(new FileReader(inputFile));
+            BufferedReader reader2 = new BufferedReader(new FileReader(inputFile));
+            Maze maze = new Maze(reader1, reader2);
+            maze.setDimensions();
+            maze.setMaze();
+            maze.getMaze();
+
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
+
         logger.info("**** Computing path");
         logger.warn("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
