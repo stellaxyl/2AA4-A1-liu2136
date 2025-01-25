@@ -43,18 +43,28 @@ public class Main {
             BufferedReader reader2 = new BufferedReader(new FileReader(inputFile));
             Maze maze = new Maze(reader1, reader2);
             maze.setDimensions();
-            maze.setMaze();
+            char[][] mazeArr = maze.setMaze();
             maze.getMaze();
-            System.out.println(maze.checkEntry() + ",0");
-            System.out.println(maze.checkExit() + "," + maze.getWidth());
+            int width = maze.getWidth();
+            int length = maze.getLength();
+            int entry = maze.checkEntry();
+            int exit = maze.checkExit();
+            
+            //System.out.println(maze.checkEntry() + ",0");
+            //System.out.println(maze.checkExit() + "," + maze.getWidth());
+            String direction = "RIGHT";
+
+            logger.info("**** Computing path");
+            Path path = new Path(mazeArr, width, length, entry, exit, direction);
+            System.out.println(path.findPath());
 
 
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
 
-        logger.info("**** Computing path");
-        logger.warn("PATH NOT COMPUTED");
+        //logger.info("**** Computing path");
+        //logger.warn("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
 }
