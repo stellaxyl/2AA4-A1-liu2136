@@ -55,6 +55,7 @@ public class Main {
             String direction = "RIGHT";
 
             logger.info("**** Computing path");
+            
             Path path = new Path(mazeArr, width, length, entry, exit, direction);
             System.out.println(path.findPath());
 
