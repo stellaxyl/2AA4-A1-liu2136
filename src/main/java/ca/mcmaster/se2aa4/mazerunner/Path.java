@@ -10,6 +10,7 @@ public class Path{
     private int col;
     private int entry;
     private int exit;
+    private String move;
 
     private Direction dir;
 
@@ -30,23 +31,32 @@ public class Path{
         
         dir = new Direction(direction, maze, width, length);
         dir.setMovement();
-        dir.getDirection();
+        direction = dir.getDirection();
         row = dir.getRow();
         col = dir.getCol();
+
+        RightHandAlgorithm rightAlgo = new RightHandAlgorithm(maze);
 
 
         while (coord[0] != exit || coord[1] != width-1) {
             if (validateMove(coord[0]+row, coord[1]+col)) {
-                path.append("F");
-                coord[0] += row;
-                coord[1] += col;
+                move = rightAlgo.checkRight(direction, coord[0], coord[1], row, col);
+                
+                dir.updateDirection(move);
+                dir.setMovement();
+                direction = dir.getDirection();
+                row = dir.getRow();
+                col = dir.getCol();
+                System.out.print(move + ", " + direction + ", " + coord[0] + ", " + coord[1] + ", " + row + ", " + col);
+
+                path.append(move);
+                if (move.contains("F")) {
+                    coord[0] += row;
+                    coord[1] += col;
+                }
+                //System.out.print("hi" + coord[0] + coord[1] + entry + exit + width);
             }
 
-            /*else {
-                if (direction == "UP") {
-
-                }
-            }*/
         }
 
         strPath = path.toString();
@@ -55,7 +65,7 @@ public class Path{
     }
 
     public boolean validateMove(int newRow, int newCol) {
-        if (newRow >= 0 && newRow < length && newCol >= 0 && newCol < width && maze[newRow][newCol] == ' ') {
+        if (newRow >= 0 && newRow < length && newCol >= 0 && newCol < width) {
             return true;
         }
 

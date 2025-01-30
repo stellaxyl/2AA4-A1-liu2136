@@ -88,7 +88,7 @@ public class Maze{
 
     public int checkExit() {
         for (int j = 0; j < length; j++) {
-            if (maze[j][0] == ' ') {
+            if (maze[j][width-1] == ' ') {
                 exit = j;
             }
         }
