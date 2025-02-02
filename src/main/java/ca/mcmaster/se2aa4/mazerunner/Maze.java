@@ -41,13 +41,11 @@ public class Maze{
         try{
 
             while ((line = reader2.readLine()) != null) {
-                if (line.isEmpty()) {
-                    for (int j = 0; j < width; j++) {
-                        maze[count][j] = ' ';
+                for (int i = 0; i < width; i++) {
+                    if (i > line.length()-1) {
+                        maze[count][i] = ' ';
                     }
-                }
-                else {
-                    for (int i = 0; i < line.length(); i++) {
+                    else {
                         maze[count][i] = line.charAt(i);
                     }
                 }
