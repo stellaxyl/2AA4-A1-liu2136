@@ -16,6 +16,11 @@ public class Path{
 
     private StringBuffer path = new StringBuffer();
     private String strPath;
+    private StringBuffer factorizedPath = new StringBuffer();
+    private String strFactorizedPath;
+    private int count = 0;
+    private String strCount;
+    private char prevLetter;
 
     public Path(char[][] maze, int width, int length, int entry, int exit, String direction) {
         this.maze = maze;
@@ -47,7 +52,7 @@ public class Path{
                 direction = dir.getDirection();
                 row = dir.getRow();
                 col = dir.getCol();
-                System.out.print(move + ", " + direction + ", " + coord[0] + ", " + coord[1] + ", " + row + ", " + col);
+                //System.out.print(move + ", " + direction + ", " + coord[0] + ", " + coord[1] + ", " + row + ", " + col);
 
                 path.append(move);
                 if (move.contains("F")) {
@@ -62,6 +67,34 @@ public class Path{
         strPath = path.toString();
 
         return strPath;
+    }
+
+    public String findPathFactorized() {
+        for (int pointer = 0; pointer < findPath().length(); pointer++) {
+            if (pointer == 0) {
+                prevLetter = findPath().charAt(pointer);
+                count++;
+            }
+            else {
+                if (findPath().charAt(pointer) == prevLetter) {
+                    count++;
+                }
+                else {
+                    strCount = Integer.toString(count);
+                    factorizedPath.append(String.format("%s%c ", strCount, prevLetter));
+                    count = 1;
+                    prevLetter = findPath().charAt(pointer);
+                }
+            }
+        }
+        if (count > 0) {
+            strCount = Integer.toString(count);
+            factorizedPath.append(strCount);
+            factorizedPath.append(prevLetter);
+        }
+
+        strFactorizedPath = factorizedPath.toString();
+        return strFactorizedPath;
     }
 
     public boolean validateMove(int newRow, int newCol) {

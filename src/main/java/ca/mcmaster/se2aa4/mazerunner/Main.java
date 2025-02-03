@@ -58,10 +58,11 @@ public class Main {
             
             Path path = new Path(mazeArr, width, length, entry, exit, direction);
             System.out.println(path.findPath());
+            System.out.println(path.findPathFactorized());
 
 
         } catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
+            logger.error("/!\\ An error has occured /!\\" + e.getMessage());
         }
 
         //logger.info("**** Computing path");
