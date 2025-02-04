@@ -17,6 +17,7 @@ public class Direction {
         this.length = length;
     }
 
+    // Method to set the movement based on the current direction
     public void setMovement() {
         if (direction == "UP") {
             row = -1;
@@ -36,18 +37,22 @@ public class Direction {
         }
     }
 
+    // Gets row to add
     public int getRow() {
         return row;
     }
 
+    // Gets column to add
     public int getCol() {
         return col;
     }
 
+    // Gets current direction
     public String getDirection() {
         return direction;
     }
 
+    // Method to update the direction based on the move
     public void updateDirection(String move) {
         if (direction == "UP") {
             if (move.contains("R")) {

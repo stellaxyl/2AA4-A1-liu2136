@@ -38,6 +38,7 @@ public class CheckPath {
         this.direction = direction;
     }
 
+    // Method to factorize the given path
     public String factorizedToCanonical() {
         while (pointer < givenPath.length()) {
             if (Character.isDigit(givenPath.charAt(pointer))) {
@@ -69,6 +70,7 @@ public class CheckPath {
 
     }
 
+    // Method to get the path that needs to be checked, factorize if needed
     public String getPathToCheck() {
         if (Character.isDigit(givenPath.charAt(0))) {
             pathToCheck = factorizedToCanonical();
@@ -80,6 +82,7 @@ public class CheckPath {
         return pathToCheck;
     }
 
+    // Method to check the validity of the given path
     public String checkPath() {
         dir = new Direction(direction, maze, width, length);
         dir.setMovement();
@@ -112,6 +115,7 @@ public class CheckPath {
         return validPath;
     }
 
+    // Method to validate the moves in the path
     public void validateMove() {
         path = getPathToCheck();
         for (int j = 0; j < path.length(); j++) {

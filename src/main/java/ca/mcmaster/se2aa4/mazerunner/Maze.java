@@ -21,6 +21,7 @@ public class Maze{
         this.reader2 = reader2;
     }
 
+    // Method to calculate and set the dimensions (length and width) of the maze
     public void setDimensions() {
         try{
             while ((line = reader.readLine()) != null) {
@@ -35,6 +36,7 @@ public class Maze{
         }
     }
 
+    // Method to create and return the maze as a 2D char array
     public char[][] setMaze() {
         maze = new char[length][width];
         int count = 0;
@@ -57,6 +59,7 @@ public class Maze{
         return maze;
     }
 
+    // Method to print the maze to the console
     public void getMaze() {
         for (char[] length : maze) {
             for (char width : length) {
@@ -66,15 +69,17 @@ public class Maze{
         }
     }
 
+    // Getter method for the width of the maze
     public int getWidth() {
         return width;
     }
 
+    // Getter method for the length of the maze
     public int getLength() {
         return length;
     }
 
-
+    // Method to check and return the row index of the maze entry point
     public int checkEntry() {
         for (int i = 0; i < length; i++) {
             if (maze[i][0] == ' ') {
@@ -84,6 +89,7 @@ public class Maze{
         return entry;
     }
 
+    // Method to check and return the row index of the maze exit point
     public int checkExit() {
         for (int j = 0; j < length; j++) {
             if (maze[j][width-1] == ' ') {

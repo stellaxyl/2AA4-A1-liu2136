@@ -32,6 +32,7 @@ public class Path {
         this.direction = direction;
     }
 
+    // Method to find the path through the maze
     public String findPath() {
         
         dir = new Direction(direction, maze, width, length);
@@ -69,6 +70,7 @@ public class Path {
         return strPath;
     }
 
+    // Method to find the factorized version of the path (e.g., compress consecutive moves)
     public String findPathFactorized() {
         for (int pointer = 0; pointer < findPath().length(); pointer++) {
             if (pointer == 0) {
@@ -101,6 +103,7 @@ public class Path {
         return strFactorizedPath;
     }
 
+    // Method to validate if the move to a new position is within the maze bounds
     public boolean validateMove(int newRow, int newCol) {
         if (newRow >= 0 && newRow < length && newCol >= 0 && newCol < width) {
             return true;

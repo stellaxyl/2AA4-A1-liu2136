@@ -11,13 +11,9 @@ public class RightHandAlgorithm implements Algorithm {
 
     public RightHandAlgorithm(char[][] maze) {
         this.maze = maze;
-        //this.direction = direction;
-        /*this.currentX = currentX;
-        this.currentY = currentY;
-        this.row = row;
-        this.col = col;*/
     }
 
+    // The method implements the Right-Hand Algorithm for moving through the maze
     @Override
     public String implementAlgorithm(String direction, int currentY, int currentX, int row, int col) {
 
