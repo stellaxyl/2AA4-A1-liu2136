@@ -69,12 +69,12 @@ public class Maze{
         }
     }
 
-    // Getter method for the width of the maze
+    // Gets the width of the maze
     public int getWidth() {
         return width;
     }
 
-    // Getter method for the length of the maze
+    // Gets the length of the maze
     public int getLength() {
         return length;
     }
