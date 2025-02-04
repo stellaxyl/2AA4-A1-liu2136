@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class RightHandAlgorithm {
+public class RightHandAlgorithm implements Algorithm {
 
     private char[][] maze;
     private String direction;
@@ -18,7 +18,8 @@ public class RightHandAlgorithm {
         this.col = col;*/
     }
 
-    public String checkRight(String direction, int currentY, int currentX, int row, int col) {
+    @Override
+    public String implementAlgorithm(String direction, int currentY, int currentX, int row, int col) {
 
         if (direction == "RIGHT") {
             if (maze[currentY+1][currentX] == '#') {

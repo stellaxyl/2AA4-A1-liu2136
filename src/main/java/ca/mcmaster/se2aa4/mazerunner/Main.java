@@ -6,6 +6,7 @@ import java.io.FileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -16,12 +17,30 @@ public class Main {
 
         Options options = new Options();
         options.addOption("i", true, "Maze file input");
+        options.addOption(Option.builder("p")
+            .hasArgs()
+            .desc("Path to check for validity")
+            .build());
 
         CommandLineParser parser = new DefaultParser();
 
         try {
+
             CommandLine cmd = parser.parse(options, args);
+
+            //CHECK IF HAS I IS THERE AND HAS VALID INPUT
+            if (!cmd.hasOption("i")) {
+                logger.error("Missing argument '-i' before inputting a maze file");
+                System.exit(1);
+            }
+
             String inputFile = cmd.getOptionValue("i");
+
+            //CHECK IF ARGUMENT IS CORRECT
+            if (inputFile == null) {
+                logger.error("No file path argument detected");
+                System.exit(1);
+            }
 
             logger.info("**** Reading the maze from file " + inputFile);
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -44,29 +63,47 @@ public class Main {
             Maze maze = new Maze(reader1, reader2);
             maze.setDimensions();
             char[][] mazeArr = maze.setMaze();
-            maze.getMaze();
             int width = maze.getWidth();
             int length = maze.getLength();
             int entry = maze.checkEntry();
             int exit = maze.checkExit();
+            String givenPath = null;
+
+            if (cmd.hasOption("p")) {
+                givenPath = String.join("", cmd.getOptionValues("p"));
+            }
+
+            if (!cmd.hasOption("p") && cmd.getArgList().size() > 0) {
+                logger.error("Current system function is to find path to exit. To input and check your path, include argument '-p'");
+                System.exit(1);
+            }
+
+
+            if (cmd.hasOption("p") && (cmd.getOptionValues("p") == null || cmd.getOptionValues("p").length == 0)) {
+                logger.error("Missing argument to check user input path. Please input a valid path");
+                System.exit(1);
+            }
+
+            if (givenPath == null) {
+                String direction = "RIGHT";
+
+                logger.info("**** Computing path");
+                
+                Path path = new Path(mazeArr, width, length, entry, exit, direction);
+                System.out.println(path.findPathFactorized());
+            }
+            else {
+                String direction = "RIGHT";
+                CheckPath check = new CheckPath(givenPath, mazeArr, width, length, entry, exit, direction);
+                System.out.println(check.checkPath());
+            }
             
-            //System.out.println(maze.checkEntry() + ",0");
-            //System.out.println(maze.checkExit() + "," + maze.getWidth());
-            String direction = "RIGHT";
-
-            logger.info("**** Computing path");
-            
-            Path path = new Path(mazeArr, width, length, entry, exit, direction);
-            System.out.println(path.findPath());
-            System.out.println(path.findPathFactorized());
-
-
         } catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\" + e.getMessage());
+            logger.error("/!\\ An error has occured /!\\");
         }
 
-        //logger.info("**** Computing path");
-        //logger.warn("PATH NOT COMPUTED");
+        logger.info("**** Computing path");
+        logger.warn("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
 }

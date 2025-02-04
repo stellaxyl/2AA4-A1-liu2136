@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class Path{
+public class Path {
     private char[][] maze;
     private int width;
     private int length;
@@ -40,12 +40,12 @@ public class Path{
         row = dir.getRow();
         col = dir.getCol();
 
-        RightHandAlgorithm rightAlgo = new RightHandAlgorithm(maze);
+        Algorithm algorithm = new RightHandAlgorithm(maze);
 
 
         while (coord[0] != exit || coord[1] != width-1) {
             if (validateMove(coord[0]+row, coord[1]+col)) {
-                move = rightAlgo.checkRight(direction, coord[0], coord[1], row, col);
+                move = algorithm.implementAlgorithm(direction, coord[0], coord[1], row, col);
                 
                 dir.updateDirection(move);
                 dir.setMovement();
@@ -81,7 +81,11 @@ public class Path{
                 }
                 else {
                     strCount = Integer.toString(count);
-                    factorizedPath.append(String.format("%s%c ", strCount, prevLetter));
+                    if (count > 1) {
+                        factorizedPath.append(String.format(strCount));
+                    }
+                    factorizedPath.append(Character.toString(prevLetter));
+                    factorizedPath.append(" ");
                     count = 1;
                     prevLetter = findPath().charAt(pointer);
                 }
