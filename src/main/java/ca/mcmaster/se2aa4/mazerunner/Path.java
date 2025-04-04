@@ -95,7 +95,9 @@ public class Path {
         }
         if (count > 0) {
             strCount = Integer.toString(count);
-            factorizedPath.append(strCount);
+            if (count > 1) {
+                factorizedPath.append(strCount);
+            }
             factorizedPath.append(prevLetter);
         }
 

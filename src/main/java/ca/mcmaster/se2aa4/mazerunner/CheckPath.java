@@ -72,11 +72,11 @@ public class CheckPath {
 
     // Method to get the path that needs to be checked, factorize if needed
     public String getPathToCheck() {
-        if (Character.isDigit(givenPath.charAt(0))) {
-            pathToCheck = factorizedToCanonical();
+        if (givenPath.matches("^[FLR\\s]+$")) {
+            pathToCheck = givenPath;
         }
         else {
-            pathToCheck = givenPath;
+            pathToCheck = factorizedToCanonical();
         }
 
         return pathToCheck;
@@ -120,7 +120,7 @@ public class CheckPath {
         path = getPathToCheck();
         for (int j = 0; j < path.length(); j++) {
             if (path.charAt(j) != 'F' && path.charAt(j) != 'R' && path.charAt(j) != 'L') {
-                System.err.println("Error: Please entera valid path");
+                System.err.println("Error: Please enter a valid path");
                 System.exit(1);
             }
         }
