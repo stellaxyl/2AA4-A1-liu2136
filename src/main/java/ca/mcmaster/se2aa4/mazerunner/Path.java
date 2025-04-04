@@ -4,7 +4,7 @@ public class Path {
     private char[][] maze;
     private int width;
     private int length;
-    private String direction;
+    private Direction direction;
     private int[] coord;
     private int row;
     private int col;
@@ -12,7 +12,9 @@ public class Path {
     private int exit;
     private String move;
 
-    private Direction dir;
+    private ActionPackage forward;
+    private ActionPackage right;
+    private ActionPackage left;
 
     private StringBuffer path = new StringBuffer();
     private String strPath;
@@ -22,7 +24,7 @@ public class Path {
     private String strCount;
     private char prevLetter;
 
-    public Path(char[][] maze, int width, int length, int entry, int exit, String direction) {
+    public Path(char[][] maze, int width, int length, int entry, int exit, Direction direction) {
         this.maze = maze;
         this.width = width;
         this.length = length;
@@ -30,16 +32,18 @@ public class Path {
         this.entry = entry;
         this.exit = exit;
         this.direction = direction;
+        this.forward = (ActionPackage) new Forward(this.direction);
+        this.left = (ActionPackage) new Left(this.direction);
+        this.right = (ActionPackage) new Right(this.direction);
     }
 
     // Method to find the path through the maze
     public String findPath() {
+
+        int[] forwardMove = forward.execute();
         
-        dir = new Direction(direction, maze, width, length);
-        dir.setMovement();
-        direction = dir.getDirection();
-        row = dir.getRow();
-        col = dir.getCol();
+        row =  forwardMove[0];
+        col = forwardMove[1];
 
         Algorithm algorithm = new RightHandAlgorithm(maze);
 
@@ -47,12 +51,16 @@ public class Path {
         while (coord[0] != exit || coord[1] != width-1) {
             if (validateMove(coord[0]+row, coord[1]+col)) {
                 move = algorithm.implementAlgorithm(direction, coord[0], coord[1], row, col);
-                
-                dir.updateDirection(move);
-                dir.setMovement();
-                direction = dir.getDirection();
-                row = dir.getRow();
-                col = dir.getCol();
+                forwardMove = forward.execute();
+                row =  forwardMove[0];
+                col = forwardMove[1];
+                        
+                if (move.contains("R")) {
+                    right.execute();
+                }
+                if (move.contains("L")) {
+                    left.execute();
+                }
                 //System.out.print(move + ", " + direction + ", " + coord[0] + ", " + coord[1] + ", " + row + ", " + col);
 
                 path.append(move);

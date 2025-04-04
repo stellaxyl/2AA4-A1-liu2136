@@ -16,7 +16,7 @@ public class PathTest {
 
 	@Test
 	public void findPath() {
-		Path p = new Path(testMaze, 7, 7, 5, 1, "RIGHT");
+		Path p = new Path(testMaze, 7, 7, 5, 1, Direction.RIGHT);
 		String expected = "FFFFFLLFFRFFRFFLLFFRFFRFFF";
 		String actual = p.findPath();
 
@@ -25,7 +25,7 @@ public class PathTest {
 
 	@Test
 	public void findPathFactorized() {
-		Path p = new Path(testMaze, 7, 7, 5, 1, "RIGHT");
+		Path p = new Path(testMaze, 7, 7, 5, 1, Direction.RIGHT);
 		String expected = "5F 2L 2F R 2F R 2F 2L 2F R 2F R 3F";
 		String actual = p.findPathFactorized();
 

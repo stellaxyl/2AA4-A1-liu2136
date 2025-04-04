@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-//both left to right and right to left
-
 public class CheckPath {
     private String givenPath;
     private StringBuilder canonicalForm = new StringBuilder();
@@ -12,6 +10,10 @@ public class CheckPath {
     private char currentMove;
     private String pathToCheck;
     private String path;
+
+    private ActionPackage forward;
+    private ActionPackage right;
+    private ActionPackage left;
     
     private char[][] maze;
     private int width;
@@ -23,11 +25,10 @@ public class CheckPath {
     private int exit;
 
     private char move;
-    private String direction;
-    private Direction dir;
+    private Direction direction;
     private String validPath = "Correct Path, you have solved the maze!";
     
-    public CheckPath(String givenPath, char[][] maze, int width, int length, int entry, int exit, String direction) {
+    public CheckPath(String givenPath, char[][] maze, int width, int length, int entry, int exit, Direction direction) {
         this.givenPath = givenPath;
         this.maze = maze;
         this.width = width;
@@ -36,6 +37,9 @@ public class CheckPath {
         this.entry = entry;
         this.exit = exit;
         this.direction = direction;
+        this.forward = (ActionPackage) new Forward(this.direction);
+        this.left = (ActionPackage) new Left(this.direction);
+        this.right = (ActionPackage) new Right(this.direction);
     }
 
     // Method to factorize the given path
@@ -84,22 +88,26 @@ public class CheckPath {
 
     // Method to check the validity of the given path
     public String checkPath() {
-        dir = new Direction(direction, maze, width, length);
-        dir.setMovement();
-        direction = dir.getDirection();
-        row = dir.getRow();
-        col = dir.getCol();
+        int[] forwardMove = forward.execute();
+        
+        row =  forwardMove[0];
+        col = forwardMove[1];
         path = getPathToCheck();
         validateMove();
 
         for (int i = 0; i < path.length(); i++) {
             move = path.charAt(i);
 
-            dir.updateDirection(Character.toString(move));
-            dir.setMovement();
-            direction = dir.getDirection();
-            row = dir.getRow();
-            col = dir.getCol();
+            forwardMove = forward.execute();
+            row =  forwardMove[0];
+            col = forwardMove[1];
+
+            if (move == 'R') {
+                right.execute();
+            }
+            if (move == 'L') {
+                left.execute();
+            }
 
             if (move == 'F' && maze[coord[0]+row][coord[1]+col] == ' ') {
                 coord[0] += row;

@@ -3,11 +3,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 public class RightHandAlgorithm implements Algorithm {
 
     private char[][] maze;
-    private String direction;
-    private int currentX;
-    private int currentY;
-    private int row;
-    private int col;
 
     public RightHandAlgorithm(char[][] maze) {
         this.maze = maze;
@@ -15,95 +10,24 @@ public class RightHandAlgorithm implements Algorithm {
 
     // The method implements the Right-Hand Algorithm for moving through the maze
     @Override
-    public String implementAlgorithm(String direction, int currentY, int currentX, int row, int col) {
+    public String implementAlgorithm(Direction direction, int currentY, int currentX, int row, int col) {
 
-        if (direction == "RIGHT") {
-            if (maze[currentY+1][currentX] == '#') {
-                if (maze[currentY+row][currentX+col] == ' ') {
-                    return "F";
-                }
-                else {
-                    return "L";
-                }
+        if (maze[currentY+col][currentX-row] == '#') {
+            if (maze[currentY+row][currentX+col] == ' ') {
+                return "F";
             }
             else {
-                if (maze[currentY+col][currentX+row] == ' ') {
-                    currentY += row;
-                    currentX += col;
-                    return "RF";
-                }
-                else {
-                    return "R";
-                }
+                return "L";
             }
         }
-        else if (direction == "LEFT") {
-            if (maze[currentY-1][currentX] == '#') {
-                if (maze[currentY+row][currentX+col] == ' ') {
-                    currentY += row;
-                    currentX += col;
-                    return "F";
-                }
-                else {
-                    return "L";
-                }
+        else {
+            if (maze[currentY+col][currentX+row] == ' ') {
+                return "RF";
             }
             else {
-                if (maze[currentY+col][currentX+row] == ' ') {
-                    currentY += row;
-                    currentX += col;
-                    return "RF";
-                }
-                else {
-                    return "R";
-                }
-                
+                return "R";
             }
         }
-        else if (direction == "UP") {
-            if (maze[currentY][currentX+1] == '#') {
-                if (maze[currentY+row][currentX+col] == ' ') {
-                    currentY += row;
-                    currentX += col;
-                    return "F";
-                }
-                else {
-                    return "L";
-                }
-            }
-            else {
-                if (maze[currentY-col][currentX-row] == ' ') {
-                    currentY += row;
-                    currentX += col;
-                    return "RF";
-                }
-                else {
-                    return "R";
-                }
-            }
-        }
-        else if (direction == "DOWN") {
-            if (maze[currentY][currentX-1] == '#') {
-                if (maze[currentY+row][currentX+col] == ' ') {
-                    currentY += row;
-                    currentX += col;
-                    return "F";
-                }
-                else {
-                    return "L";
-                }
-            }
-            else {
-                if (maze[currentY-col][currentX-row] == ' ') {
-                    currentY += row;
-                    currentX += col;
-                    return "RF";
-                }
-                else {
-                    return "R";
-                }
-            }
-        }
-        else return "";
     }
+        
 }

@@ -17,7 +17,7 @@ public class RightHandAlgorithmTest {
 	@Test
 	public void implementAlgorithm() {
 		RightHandAlgorithm r = new RightHandAlgorithm(testMaze);
-		String direction = "RIGHT";
+		Direction direction = Direction.RIGHT;
 		int currentY = 5;
 		int currentX = 0;
 		int row = 0;
@@ -31,7 +31,7 @@ public class RightHandAlgorithmTest {
 	@Test
 	public void implementAlgorithmTODO() {
 		RightHandAlgorithm r = new RightHandAlgorithm(testMaze);
-		String direction = "RIGHT";
+		Direction direction = Direction.RIGHT;
 		int currentY = 5;
 		int currentX = 5;
 		int row = 0;
@@ -45,7 +45,7 @@ public class RightHandAlgorithmTest {
 	@Test
 	public void implementAlgorithmTODOTODO() {
 		RightHandAlgorithm r = new RightHandAlgorithm(testMaze);
-		String direction = "UP";
+		Direction direction = Direction.UP;
 		int currentY = 3;
 		int currentX = 3;
 		int row = -1;

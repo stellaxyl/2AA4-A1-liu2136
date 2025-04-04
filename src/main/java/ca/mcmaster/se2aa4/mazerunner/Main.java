@@ -1,12 +1,15 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.commons.cli.*;
-import java.util.Scanner;
 
 public class Main {
 
@@ -96,7 +99,7 @@ public class Main {
 
             // If no given path, compute the path using the maze and print the computed path
             if (givenPath == null) {
-                String direction = "RIGHT";
+                Direction direction = Direction.RIGHT;
 
                 logger.info("**** Computing path");
                 
@@ -106,7 +109,7 @@ public class Main {
             
             // Otherwise, check the validity of the provided path
             else {
-                String direction = "RIGHT";
+                Direction direction = Direction.RIGHT;
                 CheckPath check = new CheckPath(givenPath, mazeArr, width, length, entry, exit, direction);
                 System.out.println(check.checkPath());
             }
