@@ -9,16 +9,16 @@ public class Right extends ActionPackage{
 
     @Override
     public void determineDirection() {
-        if (direction == Direction.UP) {
+        if (super.direction == Direction.UP) {
             direction = Direction.RIGHT;
         }
-        else if (direction == Direction.DOWN) {
+        else if (super.direction == Direction.DOWN) {
             direction = Direction.LEFT;
         }
-        else if (direction == Direction.LEFT) {
+        else if (super.direction == Direction.LEFT) {
             direction = Direction.UP;
         }
-        else if (direction == Direction.RIGHT) {
+        else if (super.direction == Direction.RIGHT) {
                 direction = Direction.DOWN;
         }
     }

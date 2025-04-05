@@ -88,7 +88,7 @@ public class CheckPath {
 
     // Method to check the validity of the given path
     public String checkPath() {
-        int[] forwardMove = forward.execute();
+        int[] forwardMove = forward.execute(direction);
         
         row =  forwardMove[0];
         col = forwardMove[1];
@@ -98,16 +98,17 @@ public class CheckPath {
         for (int i = 0; i < path.length(); i++) {
             move = path.charAt(i);
 
-            forwardMove = forward.execute();
-            row =  forwardMove[0];
-            col = forwardMove[1];
-
             if (move == 'R') {
-                right.execute();
+                direction = right.execute(direction);
             }
             if (move == 'L') {
-                left.execute();
+                direction = left.execute(direction);
             }
+
+            forward.updateDirection(direction);
+            forwardMove = forward.execute(direction);
+            row =  forwardMove[0];
+            col = forwardMove[1];
 
             if (move == 'F' && maze[coord[0]+row][coord[1]+col] == ' ') {
                 coord[0] += row;

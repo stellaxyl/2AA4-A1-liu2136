@@ -10,16 +10,16 @@ public class Left extends ActionPackage{
 
     @Override
     public void determineDirection() {
-        if (direction == Direction.UP) {
+        if (super.direction == Direction.UP) {
             direction = Direction.LEFT;
         }
-        else if (direction == Direction.DOWN) {
+        else if (super.direction == Direction.DOWN) {
             direction = Direction.RIGHT;
         }
-        else if (direction == Direction.LEFT) {
+        else if (super.direction == Direction.LEFT) {
             direction = Direction.DOWN;
         }
-        else if (direction == Direction.RIGHT) {
+        else if (super.direction == Direction.RIGHT) {
                 direction = Direction.UP;
         }
     }

@@ -40,4 +40,8 @@ public class Forward extends ActionPackage{
         return orientation;
     }
 
+    public void updateDirection(Direction direction) {
+        this.direction = direction;
+    }
+
 }

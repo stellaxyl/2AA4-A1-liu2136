@@ -1,9 +1,11 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 public abstract class ActionPackage implements Action{
+    Direction direction;
 
     @Override
-    public <T> T execute() {
+    public <T> T execute(Direction direction) {
+        updateDirection(direction);
         determineDirection();
         return returnResult();
     }
@@ -13,6 +15,9 @@ public abstract class ActionPackage implements Action{
     @Override
     public abstract <T> T returnResult();
 
-    
+    public void updateDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     
 }

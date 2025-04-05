@@ -13,8 +13,8 @@ public class Path {
     private String move;
 
     private ActionPackage forward;
-    private ActionPackage right;
     private ActionPackage left;
+    private ActionPackage right;
 
     private StringBuffer path = new StringBuffer();
     private String strPath;
@@ -40,7 +40,7 @@ public class Path {
     // Method to find the path through the maze
     public String findPath() {
 
-        int[] forwardMove = forward.execute();
+        int[] forwardMove = forward.execute(direction);
         
         row =  forwardMove[0];
         col = forwardMove[1];
@@ -51,26 +51,23 @@ public class Path {
         while (coord[0] != exit || coord[1] != width-1) {
             if (validateMove(coord[0]+row, coord[1]+col)) {
                 move = algorithm.implementAlgorithm(direction, coord[0], coord[1], row, col);
-                forwardMove = forward.execute();
-                row =  forwardMove[0];
-                col = forwardMove[1];
-                        
                 if (move.contains("R")) {
-                    right.execute();
+                    direction = right.execute(direction);
                 }
                 if (move.contains("L")) {
-                    left.execute();
+                    direction = left.execute(direction);
                 }
-                //System.out.print(move + ", " + direction + ", " + coord[0] + ", " + coord[1] + ", " + row + ", " + col);
+                forward.updateDirection(direction);
+                forwardMove = forward.execute(direction);
+                row = forwardMove[0];
+                col = forwardMove[1];
 
                 path.append(move);
                 if (move.contains("F")) {
                     coord[0] += row;
                     coord[1] += col;
                 }
-                //System.out.print("hi" + coord[0] + coord[1] + entry + exit + width);
             }
-
         }
 
         strPath = path.toString();
