@@ -29,7 +29,7 @@ public class RightHandAlgorithmTest {
 	}
 
 	@Test
-	public void implementAlgorithmTODO() {
+	public void implementAlgorithm2() {
 		RightHandAlgorithm r = new RightHandAlgorithm(testMaze);
 		Direction direction = Direction.RIGHT;
 		int currentY = 5;
@@ -43,7 +43,7 @@ public class RightHandAlgorithmTest {
 	}
 
 	@Test
-	public void implementAlgorithmTODOTODO() {
+	public void implementAlgorithm3() {
 		RightHandAlgorithm r = new RightHandAlgorithm(testMaze);
 		Direction direction = Direction.UP;
 		int currentY = 3;

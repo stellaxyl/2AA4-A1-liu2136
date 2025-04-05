@@ -34,7 +34,7 @@ public class CheckPathTest {
 	}
 
 	@Test
-	public void checkPathTODO() {
+	public void checkPath2() {
 		CheckPath c = new CheckPath("FFFFFLLFFRFFRFFLLFFRFFRFFF", testMaze, 7, 7, 5, 1, Direction.RIGHT);
 		String expected = "Correct Path, you have solved the maze!";
 		String actual = c.checkPath();
@@ -43,7 +43,7 @@ public class CheckPathTest {
 	}
 
 	@Test
-	public void checkPathTODOTODO() {
+	public void checkPath3() {
 		CheckPath c = new CheckPath("5F 2L 2F R 2F R 2F 2L 2F R 2F R F", testMaze, 7, 7, 5, 1, Direction.RIGHT);
 		String expected = "Incorrect Path, you have not solved the maze";
 		String actual = c.checkPath();
